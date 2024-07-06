@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Extractor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Domain Extractor</h2>
+    <textarea id="input" rows="10" cols="50" placeholder="Enter your domains and SPF records here..."></textarea>
+    <br>
+	
+	
+	  <button onclick="extractDomains()" class="pushable">
+        <span class="shadow"></span>
+        <span class="edge"></span>
+        <span class="front">
+          Extract Domains
+        </span>
+    </button>
+
+
+	
+    <h3>Extracted Domains:</h3>
+    <textarea id="output" rows="10" cols="50" readonly></textarea>
+
+    <script>
+        function extractDomains() {
+            const inputText = document.getElementById('input').value;
+            const lines = inputText.split('\n');
+            const extractedDomains = lines.map(line => {
+                const [domain] = line.split(',');
+                return domain.trim();
+            }).filter(domain => domain !== '');
+            document.getElementById('output').value = extractedDomains.join('\n');
+        }
+    </script>
+</body>
+</html>
